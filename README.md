@@ -1,12 +1,42 @@
-<div align="center">
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://imagedelivery.net/3TbraffuDZ4aEf8KWOmI_w/4a157bda-2a99-4ac3-6bc7-be08b4a46600/public">
-  <source media="(prefers-color-scheme: light)" srcset="https://imagedelivery.net/3TbraffuDZ4aEf8KWOmI_w/31447544-b16f-49dd-c206-74b1802c6700/public">
-  <img width=200 alt="Trigger.dev logo" src="https://imagedelivery.net/3TbraffuDZ4aEf8KWOmI_w/4a157bda-2a99-4ac3-6bc7-be08b4a46600/public">
-</picture>
-</div>
 
-</br>
+[![Docker Pulls](https://img.shields.io/docker/pulls/henryclw/jsonhero-web)](https://hub.docker.com/r/henryclw/jsonhero-web)
+[![Docker Image Size (tag)](https://img.shields.io/docker/image-size/henryclw/jsonhero-web/latest)](https://hub.docker.com/r/henryclw/jsonhero-web)
+[![Build and Publish Docker Image](https://github.com/henryclw/jsonhero-web/actions/workflows/docker-image.yml/badge.svg)](https://github.com/henryclw/jsonhero-web/actions/workflows/docker-image.yml)
+
+# What's the differences? Docker!
+
+There main difference between this repo and the `jsonhero-io/jsonhero-web` one is **docker**.
+
+Since the pull request for docker image has been rejected. Anyone who's willing to run jsonhero with docker is welcomed to pull my image:
+
+## Pull image and run
+
+Simple, easy, and fast!
+
+```bash
+# Pull the latest image from Docker Hub
+docker pull henryclw/jsonhero-web:latest
+# Run the container, then visit http://localhost:8787
+docker run -it -d --name jsonhero_web -p 8787:8787 henryclw/jsonhero-web:latest
+```
+
+## Build your own image locally
+
+If you may want to do some customization, this is what you should look for
+
+```bash
+# Build your own image locally
+docker build . -t yourname/jsonhero-web:localdev
+# Run the container, then visit http://localhost:8787
+docker run -it -d --name jsonhero_web_dev -p 8787:8787 yourname/jsonhero-web:localdev
+```
+
+---
+
+<p align="center">
+<img width="300" src="https://imagedelivery.net/3TbraffuDZ4aEf8KWOmI_w/8aaa6f22-d600-4f26-cda9-c9f040863400/public"/>
+</p>
+
 <p align="center">
   <a href="https://console.algora.io/org/triggerdotdev/bounties?status=open"><img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fconsole.algora.io%2Fapi%2Fshields%2Ftriggerdotdev%2Fbounties%3Fstatus%3Dopen" alt="Open Bounties" /></a>
   <a href="https://console.algora.io/org/triggerdotdev/bounties?status=completed"><img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fconsole.algora.io%2Fapi%2Fshields%2Ftriggerdotdev%2Fbounties%3Fstatus%3Dcompleted" alt="Rewarded Bounties" /></a>
@@ -138,7 +168,11 @@ Have a bug or a feature request? Feel free to [open a new issue](https://github.
 
 You can also join our [Discord channel](https://discord.gg/JtBAxBr2m3) to hang out and discuss anything you'd like.
 
-## Developing
+## Developing and Deployment
+
+You could choose to deploy this service locally, either directly or by docker.
+
+## Directly
 
 To run locally, first clone the repo and install the dependencies:
 

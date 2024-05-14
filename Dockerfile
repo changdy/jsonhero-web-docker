@@ -1,12 +1,14 @@
-# Builder
-FROM node:16.17.0 as builder
-WORKDIR /src
-COPY . /src
+FROM node:16-alpine
 
-# App
-RUN cd /src
+RUN apk update
+
+WORKDIR /app
+COPY . .
+
+RUN echo "SESSION_SECRET=abc123" >> .env
+
 RUN npm install
-RUN echo "SESSION_SECRET=abc123" > .env
 RUN npm run build
 
-CMD npm start
+EXPOSE 8787
+ENTRYPOINT ["npm", "start"]
