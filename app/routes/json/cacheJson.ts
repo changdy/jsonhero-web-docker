@@ -38,3 +38,7 @@ export const saveJSON = (str: string): string => {
     cache.set(uuidStr, str);
     return uuidStr;
 };
+
+export const getJSON = (str: string): string => {
+    return cache.get(str) ?? "";
+};
