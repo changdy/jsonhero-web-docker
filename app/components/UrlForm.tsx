@@ -9,7 +9,7 @@ export type UrlFormProps = {
 export function UrlForm({ className }: UrlFormProps) {
   const transition = useTransition();
   const [inputValue, setInputValue] = useState("");
-  const formRef = useRef(null); // 创建一个ref来引用Form组件
+  const btnRef = useRef(null); // 创建一个ref来引用Form组件
   const location = useLocation();
 
   const isNotIdle = transition.state !== "idle";
@@ -29,17 +29,13 @@ export function UrlForm({ className }: UrlFormProps) {
           .then(x=>{
               setInputValue(x);  // 如果URL中有id参数，设置input的值
               // 检查formRef.current是否存在以确保引用已经被附加到元素上
-              if(formRef.current) {
-                  // 触发表单提交
-                  formRef.current.dispatchEvent(new Event('submit', { cancelable: true }));
-              }
+              btnRef.current?.click()
           })
     }
   }, []);
   return (
     <Form
       method="post"
-      ref={formRef} // 使用ref属性将formRef附加到Form组件
       action="/actions/createFromUrl"
       className={`${className}`}
     >
@@ -54,6 +50,7 @@ export function UrlForm({ className }: UrlFormProps) {
           onChange={(event) => setInputValue(event.target.value)}
         />
         <button
+            ref={btnRef} // 使用ref属性将formRef附加到Form组件
           type="submit"
           value="Go"
           className={`inline-flex items-center justify-center px-4 py-2 border border-transparent font-medium rounded-r-sm text-white bg-lime-500 transition hover:bg-lime-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-500 ${
