@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Form, useTransition } from "remix";
+import { useLocation } from "react-router-dom";
 
 export type UrlFormProps = {
   className?: string;
@@ -8,13 +9,37 @@ export type UrlFormProps = {
 export function UrlForm({ className }: UrlFormProps) {
   const transition = useTransition();
   const [inputValue, setInputValue] = useState("");
+  const formRef = useRef(null); // 创建一个ref来引用Form组件
+  const location = useLocation();
 
   const isNotIdle = transition.state !== "idle";
   const isButtonDisabled = !inputValue.length || isNotIdle;
 
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const id = queryParams.get('id');
+    if (id) {
+      fetch('/json/get?id='+id,{method:"POST"})
+          .then(response => {
+            if (response.ok) {
+                return response.text();
+            }
+            throw new Error('Network response was not ok.');
+          })
+          .then(x=>{
+              setInputValue(x);  // 如果URL中有id参数，设置input的值
+              // 检查formRef.current是否存在以确保引用已经被附加到元素上
+              if(formRef.current) {
+                  // 触发表单提交
+                  formRef.current.dispatchEvent(new Event('submit', { cancelable: true }));
+              }
+          })
+    }
+  }, []);
   return (
     <Form
       method="post"
+      ref={formRef} // 使用ref属性将formRef附加到Form组件
       action="/actions/createFromUrl"
       className={`${className}`}
     >

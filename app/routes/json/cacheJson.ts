@@ -1,4 +1,4 @@
-import {LRUCache} from "lru-cache";
+import {LRUCache} from 'lru-cache';
 
 
 function uuid(len: number, radix: number): string {

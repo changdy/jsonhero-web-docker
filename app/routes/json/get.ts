@@ -3,13 +3,15 @@ import {getJSON} from "./cacheJson"
 
 
 export const action: ActionFunction = async ({params}) => {
-    let str = getJSON(params.id ?? "");
-    return json(
-        str,
+    console.log(params)
+    return new Response(
+        getJSON(params.id ?? ""),
         {
+            status: 200,
             headers: {
+                "Content-Type": "application/json",
                 "Access-Control-Allow-Origin": "*",
-            },
+            }
         }
     );
 };
