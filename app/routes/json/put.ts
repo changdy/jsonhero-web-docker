@@ -18,7 +18,7 @@ export const loader: LoaderFunction = async ({request}) => {
 export const action: ActionFunction = async ({request, context}) => {
     const str = await request.text();
     return json(
-        {id: `/json/get?id=${saveJSON(str)}`},
+        {id: saveJSON(str)},
         {
             headers: {
                 "Access-Control-Allow-Origin": "*",
